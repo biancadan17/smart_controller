@@ -5,7 +5,7 @@ import time
 
 app = Flask(__name__)
 
-# Configurare port (Verifică în Arduino IDE dacă e COM3 sau altul)
+
 ser = serial.Serial('COM3', 9600, timeout=1)
 
 date_sistem = {"temp": "0", "flood": "0"}
@@ -24,10 +24,9 @@ def citire_seriala():
             pass
         time.sleep(0.1)
 
-# Pornim citirea în fundal
+
 threading.Thread(target=citire_seriala, daemon=True).start()
 
-# HTML cu design dinamic
 HTML = """
 <body style="background-color: {{ 'red' if flood == '1' else 'white' }}; text-align: center; font-family: Arial;">
     <h1>Monitorizare Sistem IoT</h1>
